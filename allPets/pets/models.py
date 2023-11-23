@@ -7,12 +7,20 @@ class MyPets(models.Model):
     owner = models.ForeignKey(
         to='users.User',
         on_delete=models.CASCADE,
-        related_name='owner',
+        related_name='user',
         verbose_name='Хозяин',
     )
+    photo = models.ImageField(upload_to='photo/')
+    video = models.FileField(upload_to='video/')
+    # likes = models.ForeignKey(
+    #     to='likes.Like',
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     related_name='likes',)
+    # categories = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
     timeCreate = models.DateTimeField(auto_now_add=True)
     timeUpdate = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    
 
     def __str__(self):
         return self.name
