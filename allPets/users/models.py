@@ -11,7 +11,7 @@ ROLE_CHOICES = (
     ('user', ROLES.user),
     ('admin', ROLES.admin),
 )
-class User(AbstractUser):
+class CastomUser(AbstractUser):
     """Castom model user."""
     role = models.CharField(
         verbose_name='Роль пользователя',
@@ -26,8 +26,8 @@ class User(AbstractUser):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
-    def is_admin(self) -> bool:
+    def is_admin(self):
         return self.role == ROLES.admin
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.username[:30]

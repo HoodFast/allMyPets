@@ -1,6 +1,14 @@
 
 from django.contrib import admin
-from .models import User
-from django.contrib.auth.admin import UserAdmin
+from .models import (MyPets,Likes)
+
 # Register your models here.
-admin.site.register(User, UserAdmin)
+class MyPetsAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(MyPets,MyPetsAdmin)
+
+class LikesAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Likes,LikesAdmin)
