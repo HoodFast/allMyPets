@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from pets.views import PetsViewSet
+from users.views import UsersWiewSet
 from rest_framework import routers
 
 app_name = 'allPets'
@@ -25,6 +26,9 @@ router_v1 = routers.DefaultRouter()
 
 router_v1.register(
     prefix='pets', viewset=PetsViewSet, basename='pets'
+    )
+router_v1.register(
+    prefix='users', viewset=UsersWiewSet, basename='users'
     )
 
 urlpatterns = [

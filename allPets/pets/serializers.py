@@ -12,6 +12,7 @@ class MyPetsSerializer(serializers.ModelSerializer):
     likes = serializers.PrimaryKeyRelatedField(
         queryset=Likes.objects.all(), many=True
     )
+    likesCount=Likes.objects.all().count()
     class Meta:
         model = MyPets
         fields = '__all__'
