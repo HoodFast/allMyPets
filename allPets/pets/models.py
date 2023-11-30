@@ -1,5 +1,31 @@
 from django.db import models
 
+class Category(models.Model):
+    name = models.CharField('категория',max_length=100)
+    description = models.TextField(blank=True)
+    url = models.SlugField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbode_name="Категория"
+        verbode_name_plural="Категории"
+
+
+class PetsBreeds(models.Model):
+    name = models.CharField('категория',max_length=100)
+    description = models.TextField(blank=True)
+    url = models.SlugField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbode_name="Порода"
+        verbode_name_plural="Породы"
+
+
 class MyPets(models.Model):
     title=models.CharField(max_length=100)
     name=models.CharField(max_length=100)
@@ -12,14 +38,18 @@ class MyPets(models.Model):
     )
     photo = models.ImageField(upload_to='photo/',blank=True)
     video = models.FileField(upload_to='video/',blank=True)
-    # categories = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    categories = models.ForeignKey(to='pets.Category', on_delete=models.PROTECT, null=True)
     timeCreate = models.DateTimeField(auto_now_add=True)
     timeUpdate = models.DateTimeField(auto_now=True)
-    
+    breeds = models.ManyToManyField(PetsBreeds',verbose_name='порода' null=True)
 
     def __str__(self):
         return self.name
     
+    class Meta:
+        verbode_name="Питомец"
+        verbode_name_plural="Питомцы"
+
 
 class Likes(models.Model):
     ownerLikes=models.ForeignKey(
