@@ -15,23 +15,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import include, path
-from pets.views import PetsViewSet
+from pets.views import PetsViewSet, PetsDetailView
 from users.views import UsersWiewSet
 from rest_framework import routers
 
 app_name = 'allPets'
 
-router_v1 = routers.DefaultRouter()
+# router_v1 = routers.DefaultRouter()
 
-router_v1.register(
-    prefix='pets', viewset=PetsViewSet, basename='pets'
-    )
-router_v1.register(
-    prefix='users', viewset=UsersWiewSet, basename='users'
-    )
+# router_v1.register(
+#     prefix='pets', viewset=PetsViewSet, basename='pets'
+#     )
+# router_v1.register(
+#     prefix='users', viewset=UsersWiewSet, basename='users'
+#     )
 
 urlpatterns = [
-    path('', include(router_v1.urls)),
+    path('pets/', PetsViewSet.as_view()),
+    path('pets/<int:pk>', PetsDetailView.as_view()),
     path('admin/', admin.site.urls),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

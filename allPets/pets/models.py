@@ -9,8 +9,8 @@ class Category(models.Model):
         return self.name
     
     class Meta:
-        verbode_name="Категория"
-        verbode_name_plural="Категории"
+        verbose_name="Категория"
+        verbose_name_plural="Категории"
 
 
 class PetsBreeds(models.Model):
@@ -22,8 +22,8 @@ class PetsBreeds(models.Model):
         return self.name
     
     class Meta:
-        verbode_name="Порода"
-        verbode_name_plural="Породы"
+        verbose_name="Порода"
+        verbose_name_plural="Породы"
 
 
 class MyPets(models.Model):
@@ -41,14 +41,14 @@ class MyPets(models.Model):
     categories = models.ForeignKey(to='pets.Category', on_delete=models.PROTECT, null=True)
     timeCreate = models.DateTimeField(auto_now_add=True)
     timeUpdate = models.DateTimeField(auto_now=True)
-    breeds = models.ManyToManyField(PetsBreeds',verbose_name='порода' null=True)
+    breeds = models.ManyToManyField(PetsBreeds ,verbose_name='порода', null=True)
 
     def __str__(self):
         return self.name
     
     class Meta:
-        verbode_name="Питомец"
-        verbode_name_plural="Питомцы"
+        verbose_name="Питомец"
+        verbose_name_plural="Питомцы"
 
 
 class Likes(models.Model):
