@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
 from .myUtils import MyPrimaryKeyRelatedField
-from .models import (MyPets,Likes)
+from .models import (MyPets,Likes,Post)
 
 
 
 class LikesSerializer(serializers.ModelSerializer):
-    ownerLikes=serializers.SlugRelatedField(slug_field='username',read_only=True)
+    
     class Meta:
         model=Likes
         fields=('ownerLikes',)
@@ -20,12 +20,17 @@ class MyPetsListSerializer(serializers.ModelSerializer):
 
 class MyPetsDetailSerializer(serializers.ModelSerializer):
     # likes = LikesSerializer(read_only=True, many=True)
-    likes = MyPrimaryKeyRelatedField(
+    likes = serializers.PrimaryKeyRelatedField(
         queryset=Likes.objects.all()
     )
-    
+    # posts = serializers.PrimaryKeyRelatedField(
+    #     queryset=Post.objects.all()
+    # )
     class Meta:
         model = MyPets
         fields = '__all__'
 
+    def get_likes(self,obj):
+        queryset = Likes.objects.filter(id=obj.id)
+        
        

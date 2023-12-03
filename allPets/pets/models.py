@@ -41,7 +41,7 @@ class MyPets(models.Model):
     categories = models.ForeignKey(to='pets.Category', on_delete=models.PROTECT, null=True)
     timeCreate = models.DateTimeField(auto_now_add=True)
     timeUpdate = models.DateTimeField(auto_now=True)
-    breeds = models.ManyToManyField(PetsBreeds ,verbose_name='порода', null=True)
+    # breeds = models.ManyToManyField(PetsBreeds ,verbose_name='порода', null=True)
 
     def __str__(self):
         return self.name
@@ -64,3 +64,19 @@ class Likes(models.Model):
         related_name='likes',
         verbose_name='Лайк',
     )
+
+
+class Post(models.Model):
+    petsPost = models.ForeignKey(
+        to='pets.MyPets',
+        on_delete=models.CASCADE,
+        related_name='post',
+        verbose_name='Пост',
+    )
+    title=models.CharField(max_length=100)
+    description=models.TextField(blank=True) 
+    timeCreate = models.DateTimeField(auto_now_add=True)
+
+class Comment(models.Model):
+    author = models.ForeignKey(to='users.CastomUser', on_delete=models.CASCADE, related_name='author')
+    post = models.ForeignKey(to='Post',on_delete=models.CASCADE,related_name='post')
