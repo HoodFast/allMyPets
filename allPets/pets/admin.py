@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import (MyPets,Likes,Post)
+from .models import (MyPets,Likes,Posts)
 
 # Register your models here.
 class MyPetsAdmin(admin.ModelAdmin):
@@ -12,4 +12,4 @@ class LikesAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Likes,LikesAdmin)
-admin.site.register(Post)
+admin.site.register(Posts)

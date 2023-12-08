@@ -24,7 +24,7 @@ from rest_framework import routers
 
 app_name = 'allPets'
 
-# router_v1 = routers.DefaultRouter()
+router_v1 = routers.DefaultRouter()
 
 # router_v1.register(
 #     prefix='pets', viewset=PetsViewSet, basename='pets'
@@ -34,9 +34,11 @@ app_name = 'allPets'
 #     )
 
 urlpatterns = [
+    path('', include('users.urls')),
     path('pets/', PetsViewSet.as_view()),
     path('pets/<int:pk>', PetsDetailView.as_view()),
     path('admin/', admin.site.urls),
+    path('auth/', include('rest_framework.urls'))
 ]
 
 

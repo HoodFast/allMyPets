@@ -66,7 +66,7 @@ class Likes(models.Model):
     )
 
 
-class Post(models.Model):
+class Posts(models.Model):
     petsPost = models.ForeignKey(
         to='pets.MyPets',
         on_delete=models.CASCADE,
@@ -79,4 +79,4 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(to='users.CastomUser', on_delete=models.CASCADE, related_name='author')
-    post = models.ForeignKey(to='Post',on_delete=models.CASCADE,related_name='post')
+    post = models.ForeignKey(to='Posts',on_delete=models.CASCADE,related_name='post')
