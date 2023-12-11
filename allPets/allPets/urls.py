@@ -17,9 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import include, path
+from django.urls import include, path, re_path
 from pets.views import PetsViewSet, PetsDetailView
-from users.views import UsersWiewSet
+from users.views import ProfileView
 from rest_framework import routers
 
 app_name = 'allPets'
@@ -34,11 +34,13 @@ router_v1 = routers.DefaultRouter()
 #     )
 
 urlpatterns = [
-    path('', include('users.urls')),
     path('pets/', PetsViewSet.as_view()),
     path('pets/<int:pk>', PetsDetailView.as_view()),
+    path('profile/', ProfileView.as_view()),
     path('admin/', admin.site.urls),
-    path('auth/', include('rest_framework.urls'))
+    path('auth/', include('djoser.urls')),
+
+    re_path(r'^auth/', include('djoser.urls.authtoken'))
 ]
 
 

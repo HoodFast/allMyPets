@@ -1,8 +1,14 @@
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework.decorators import action
 from rest_framework.response import Response
+
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from users.models import CastomUser
-from users.serializers import UsersSerializer
+
+from users.models import CastomUser, Profile
+from users.serializers import UsersSerializer, ProfileSerializer
+from allPets.permissions import IsOwner
 
 # Create your views here.
 class UsersWiewSet(viewsets.ModelViewSet):
@@ -22,3 +28,13 @@ class UsersWiewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception = True)
         serializer.save()
         return Response({'post':serializer.data})
+    
+   
+
+class ProfileView(APIView):
+    @action(methods=['get'], detail=False)
+    def get(self, request):
+        user = self.request.user
+        queryset = get_object_or_404(Profile, id=user.id)
+        serializer = ProfileSerializer(queryset)
+        return Response(serializer.data)

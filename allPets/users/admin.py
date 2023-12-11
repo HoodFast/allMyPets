@@ -1,8 +1,6 @@
 from django.contrib import admin
-from .models import CastomUser
+from .models import CastomUser, Profile
 # Register your models here.
 
-class CastomUserAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(CastomUser,CastomUserAdmin)
+admin.site.register(CastomUser)
+admin.site.register(Profile)

@@ -2,14 +2,10 @@
 from django.contrib import admin
 from .models import (MyPets,Likes,Posts)
 
+
 # Register your models here.
-class MyPetsAdmin(admin.ModelAdmin):
-    pass
 
-admin.site.register(MyPets,MyPetsAdmin)
+admin.site.register(MyPets)
 
-class LikesAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(Likes,LikesAdmin)
+admin.site.register(Likes)
 admin.site.register(Posts)
