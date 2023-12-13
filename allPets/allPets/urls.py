@@ -21,11 +21,17 @@ from django.urls import include, path, re_path
 from pets.views import PetsViewSet, PetsDetailView
 from users.views import ProfileView
 from rest_framework import routers
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 app_name = 'allPets'
 
 router_v1 = routers.DefaultRouter()
-
+router_v1.register(
+    prefix='profile', viewset=ProfileView, basename='profile'
+    )
 # router_v1.register(
 #     prefix='pets', viewset=PetsViewSet, basename='pets'
 #     )
@@ -34,13 +40,14 @@ router_v1 = routers.DefaultRouter()
 #     )
 
 urlpatterns = [
+    path('', include(router_v1.urls)),
     path('pets/', PetsViewSet.as_view()),
     path('pets/<int:pk>', PetsDetailView.as_view()),
-    path('profile/', ProfileView.as_view()),
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
-
-    re_path(r'^auth/', include('djoser.urls.authtoken'))
+    re_path(r'^auth/', include('djoser.urls.jwt')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 

@@ -2,7 +2,8 @@
 from collections import namedtuple
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.modelfields import PhoneNumberField
+
 # Create your models here.
 
 ROLES_NAME = namedtuple('ROLES_NAME', 'user admin')
@@ -32,6 +33,7 @@ class CastomUser(AbstractUser):
     def __str__(self):
 
         return self.username[:30]
+    
     def save(self,*args,**kwargs):
         created = not self.pk
         super().save(*args,**kwargs)
@@ -43,5 +45,5 @@ class Profile(models.Model):
     first_name = models.CharField('Имя пользователя',max_length=30,blank=True)
     last_name = models.CharField('Фамилия пользователя',max_length=30,blank=True)
     city = models.CharField('город',max_length=30,blank=True)
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(blank=True)
     status = models.TextField(blank=True)

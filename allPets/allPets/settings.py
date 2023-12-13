@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    "phonenumber_field"
+    'rest_framework_simplejwt',
+    "phonenumber_field",
+
 ]
 
 MIDDLEWARE = [
@@ -135,6 +137,13 @@ AUTH_USER_MODEL = 'users.CastomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+}
+
+PHONENUMBER_DEFAULT_REGION = "RU"
