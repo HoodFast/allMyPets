@@ -39,6 +39,5 @@ class ProfileView(viewsets.ModelViewSet):
     def get(self, request):
         user = self.request.user
         queryset = get_object_or_404(Profile, id=user.id)
-
         serializer = ProfileSerializer(queryset)
         return Response(serializer.data)

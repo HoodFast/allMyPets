@@ -34,11 +34,11 @@ class CastomUser(AbstractUser):
 
         return self.username[:30]
     
-    def save(self,*args,**kwargs):
-        created = not self.pk
-        super().save(*args,**kwargs)
-        if created:
-            Profile.objects.create(user=self)
+    # def save(self,*args,**kwargs):
+    #     created = not self.pk
+    #     super().save(*args,**kwargs)
+    #     if created:
+    #         Profile.objects.create(user=self)
 
 class Profile(models.Model):
     user = models.OneToOneField(to='CastomUser', null=True , on_delete=models.CASCADE)

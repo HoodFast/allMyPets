@@ -141,9 +141,4 @@ REST_FRAMEWORK = {
     ),
 }
 
-SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
-}
-
 PHONENUMBER_DEFAULT_REGION = "RU"
