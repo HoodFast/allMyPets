@@ -1,7 +1,9 @@
 from rest_framework import permissions
 
-class IsOwner(permissions.BasePermission):
+class ListIsNotProvided(permissions.BasePermission):
    
-    def has_permission(self, request, view, obj):
-        print(obj)
-        return False
+    def has_permission(self, request, view):
+        return request.user.is_staff
+    
+    def has_object_permission(self, request, view, obj):
+        return obj.user == request.user

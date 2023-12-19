@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 from users.models import CastomUser, Profile
 from users.serializers import UsersSerializer, ProfileSerializer
-from allPets.permissions import IsOwner
+from allPets.permissions import ListIsNotProvided
 
 # Create your views here.
 class UsersWiewSet(viewsets.ModelViewSet):
@@ -34,7 +34,7 @@ class UsersWiewSet(viewsets.ModelViewSet):
 class ProfileView(viewsets.ModelViewSet):
     queryset=Profile.objects.all()
     serializer_class=ProfileSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,ListIsNotProvided)
     @action(methods=['get'], detail=False)
     def get(self, request):
         user = self.request.user

@@ -44,13 +44,16 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework_simplejwt',
     "phonenumber_field",
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
+    'allPets.middleware.open_access_middleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -142,3 +145,5 @@ REST_FRAMEWORK = {
 }
 
 PHONENUMBER_DEFAULT_REGION = "RU"
+
+CORS_ALLOW_ALL_ORIGINS = True
